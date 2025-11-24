@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./SearchBar.module.css";
 import { fetchTrack } from "../accessTrack/accessTrack";
 
-function SearchBar({ token, onSearch }) {
+function SearchBar({ token, userID, onSearch }) {
   const [search, setSearch] = useState("");
 
   const handleChange = (e) => {
@@ -14,7 +14,8 @@ function SearchBar({ token, onSearch }) {
       alert("Enter a song name");
       return;
     }
-    if (!token) {
+
+    if (!token || !userID) {
       alert("Please log in");
       return;
     }

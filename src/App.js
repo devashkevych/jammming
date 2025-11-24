@@ -60,7 +60,7 @@ function App() {
         </button>
       </div>
       <header className="App-content">
-        <SearchBar token={token} onSearch={handleSearch} />
+        <SearchBar token={token} userID={userID} onSearch={handleSearch} />
         <div className="mainContent">
           <SearchResults
             tracks={searchResults}
