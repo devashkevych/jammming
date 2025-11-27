@@ -8,6 +8,5 @@ export async function fetchTrack(token, track) {
   );
 
   const res = await result.json();
-  console.log(res);
   return res;
 }

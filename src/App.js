@@ -4,30 +4,32 @@ import SearchBar from "./components/SearchBar/SearchBar";
 import SearchResults from "./components/SearchResults/SearchResults";
 import Playlist, { accessPlaylist } from "./components/Playlist/Playlist";
 import { startAuth, authorize } from "./components/accessToken/accessToken";
-// import { fetchTrack } from "./components/accessTrack/accessTrack";
-import { fetchProfile, userID } from "./components/accessProfile/accessProfile";
+import { fetchProfile, logout } from "./components/accessProfile/accessProfile";
 
 function App() {
-  const [token, setToken] = useState(localStorage.getItem("access_token"));
+  const [token, setToken] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [tracklist, setTracklist] = useState([]);
   const [userID, setUserID] = useState("");
+  const [displayName, setDisplayName] = useState('')
 
   useEffect(() => {
     const handleAuth = async () => {
       await authorize();
       const expiresAt = localStorage.getItem("expires_at");
+      if (expiresAt < Date.now()) {
+        localStorage.clear()
+      } 
       const newToken = localStorage.getItem("access_token");
       setToken(newToken);
 
       if (newToken) {
         await fetchProfile(newToken);
         const newUserID = localStorage.getItem("userID");
+        const newDisplayName = localStorage.getItem('display_name')
         setUserID(newUserID);
+        setDisplayName(newDisplayName)
       }
-      if (expiresAt < Date.now()) {
-        localStorage.clear()
-      } 
     };
     handleAuth();
   }, []);
@@ -55,12 +57,21 @@ function App() {
     <div className="App">
       <div className="header">
         <h1 className="App-label">Jammming</h1>
-        <button className="App-login" onClick={startAuth}>
-          Log in
-        </button>
+        {!userID ? (
+          <button className="App-login" onClick={startAuth}>
+            Log in
+          </button>
+        ) : (
+          <div className="App-loggedin">
+            <h4 className="App-name">{displayName}</h4>
+            <button className="App-logout" onClick={logout}>
+              Log out
+            </button>
+          </div>
+        )}
       </div>
       <header className="App-content">
-        <SearchBar token={token} userID={userID} onSearch={handleSearch} />
+        <div className="searchBar"><SearchBar token={token} userID={userID} onSearch={handleSearch} /></div>
         <div className="mainContent">
           <SearchResults
             tracks={searchResults}

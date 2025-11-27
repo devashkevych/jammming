@@ -9,20 +9,26 @@ p {
   margin: 0;
 }
 
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   background-color: #282c34;
 }
 
 .App {
   text-align: center;
-  width: 75%;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
-  padding-top: 24px;
+  padding: 24px 16px 0;
 }
 
 .App-content {
   background-color: #282c34;
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,17 +41,18 @@ body {
 
 .header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
-  /* background-color: #282c34; */
-  width: 75%;
-  margin: 0 auto;
+  gap: 10px;
 }
 
 .App-label {
   font-size: 2rem;
   font-weight: 700;
   color: #1db954;
+  align-self: center;
 }
 
 .App-login {
@@ -64,6 +71,43 @@ body {
   border: 1px solid #1ed760;
 }
 
+.App-loggedin {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+}
+
+.App-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.App-logout {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: #268346;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.App-logout:hover {
+  background-color: #1db954;
+}
+
+.searchBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
 .mainContent {
   display: flex;
   gap: 16px;
@@ -74,5 +118,11 @@ body {
   .mainContent {
     flex-direction: column;
     gap: 16px;
+  }
+}
+
+@media (max-width: 530px) {
+  .header {
+    justify-content: center;
   }
 }

@@ -49,9 +49,7 @@ function Playlist({
       alert("Please log in");
       return;
     }
-    console.log(playlistName);
     const trackUris = tracks.map((track) => track.uri);
-    // fetchProfile(token);
     await accessPlaylist(token, userID, playlistName, trackUris);
 
     setPlaylistName("");
