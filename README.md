@@ -5,6 +5,8 @@ A Spotify playlist creator that allows users to search for songs, create custom 
 ## Live Demo
 [View Live App](https://jammming-nine.vercel.app/)
 
+![Jammming demo](./public/Jammming-workflow.gif)
+
 ## Features
 - Search for songs using Spotify's extensive music library
 - Create custom playlists with selected tracks
