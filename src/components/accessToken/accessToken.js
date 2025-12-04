@@ -4,8 +4,6 @@ const clientId = "6a35cc5c249542dcb9a4095ccbcd0dab";
 const redirectUri = window.location.origin;
 
 export const startAuth = async () => {
-  localStorage.clear();
-
   const generateRandomString = (len) => {
     const chars =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -68,6 +66,8 @@ export const authorize = async () => {
     console.error("Token exchange failed:", await res.text());
     return;
   }
+
+  localStorage.removeItem('code_verifier')
 
   const data = await res.json();
   localStorage.setItem("access_token", data.access_token);

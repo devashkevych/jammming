@@ -16,9 +16,15 @@ function App() {
   useEffect(() => {
     const handleAuth = async () => {
       await authorize();
-      const expiresAt = localStorage.getItem("expires_at");
-      if (expiresAt < Date.now()) {
-        localStorage.clear()
+      const expiresRaw = localStorage.getItem("expires_at");
+      const expiresAt = expiresRaw ? Number(expiresRaw) : null;
+      if (expiresAt && expiresAt < Date.now()) {
+          localStorage.removeItem('access_token')
+          localStorage.removeItem('refresh_token')
+          localStorage.removeItem('expires_at')
+          localStorage.removeItem('userID')
+          localStorage.removeItem('display_name')
+          localStorage.removeItem('search')
       } 
       const newToken = localStorage.getItem("access_token");
       setToken(newToken);

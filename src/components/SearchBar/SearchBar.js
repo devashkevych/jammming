@@ -3,10 +3,12 @@ import styles from "./SearchBar.module.css";
 import { fetchTrack } from "../accessTrack/accessTrack";
 
 function SearchBar({ token, userID, onSearch }) {
-  const [search, setSearch] = useState("");
-
+  const [search, setSearch] = useState(() => localStorage.getItem('search') || '');
+  
   const handleChange = (e) => {
-    setSearch(e.target.value);
+    const value = e.target.value
+    setSearch(value);
+    localStorage.setItem('search', value)
   };
 
   const handleSubmit = async (search) => {
